@@ -9,8 +9,8 @@ body {
 }
 
 .gambarTahu {
-  width: 70%;
-  height: 70%;
+  width: auto;
+  height: 400px;
 }
 
 .mainDisplay {
@@ -41,7 +41,7 @@ body {
 }
 
 .cards {
-  height: 85%;
+  height: 100%;
   background: rgba( 255, 255, 255, 0.05 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 15px );
@@ -111,8 +111,8 @@ body {
     width: 90%;
   }
 
-  .gambarTahu {
-    width: 80%;
+  .gambarTahu img {
+    height: 100px;
   }
   
 }

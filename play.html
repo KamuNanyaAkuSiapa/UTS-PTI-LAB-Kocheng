@@ -1,0 +1,177 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kocheng Jualan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="Style/play.css">
+</head>
+
+<body>
+  <div class="mainDisplay py-5">
+
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a href="home.html"><button class="btn-nav">Home</button></a>
+        <div class="container text-center judulGame">
+          <h1>Tahu Bulat's Game</h1>
+        </div>
+        <a href="#"><button class="btn-nav">About Us</button></a>
+      </div>
+    </nav>
+
+    <div class="container" style="margin-bottom: 80px;">
+      <div class="row text-center g-5">
+        <div class="col-lg-5">
+          <div class="cards p-5">
+            <div class="card-content">
+              <h5>INFORMATION</h5>
+
+              <div class="cabang">
+                <span class="cabangVal p-2">0</span>
+                <p>Jumlah Cabang</p>
+              </div>
+
+              <div class="uang">
+                <span class="uangVal p-2">$0</span>
+                <p>Uang Juragan</p>
+              </div>
+
+              <div>
+                <Button class="btnBuy btnAuto p-2">Auto Clicker $80</Button>
+                <Button class="btnBuy btnCabang p-2 mt-3">Toko Baru $50</Button>
+                <button type="button" class="btnBuy p-2 mt-3" onclick="openModal()">Upgrades</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-7">
+          <div class="bungkusTahu">
+            <div class="bungkusTahu-content">
+              <h5 id="income" class="incomeJuragan p-3">Income = $1</h5>
+              <img src="Asset/img/keqingcat.png" class="gambarTahu">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="upgradeTokoModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content container">
+        <div class="modal-header text-center">
+          <h1 class="modal-title">Upgrade Income Juragan</h1>
+          <button type="button" class="close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="button">
+            <button type="button" class="btnUpgrade btnRisol" data-index="0">Mie level-1 $50</button>
+            <p class="keterangan ketRisol text-center mt-2">Income +$1</p>
+          </div>
+          <div class="button">
+            <button type="button" class="btnUpgrade btnCakwe" data-index="1">Rendang level-1 $80</button>
+            <p class="keterangan ketCakwe text-center mt-2">Income +$2</p>
+          </div>
+          <div class="button">
+            <button type="button" class="btnUpgrade btnCimol" data-index="2">Nasgor level-1 $100</button>
+            <p class="keterangan ketCimol text-center mt-2">Income +$3</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+let money = 0;
+let cabang = 0;
+let income = 1;
+let autoClicker = false;
+let upgrades = [
+  { level: 1, cost: 50, incomeIncrease: 1 },
+  { level: 2, cost: 80, incomeIncrease: 2 },
+  { level: 3, cost: 100, incomeIncrease: 3 }
+];
+
+const moneyElem = document.querySelector('.uangVal');
+const cabangElem = document.querySelector('.cabangVal');
+
+const btnAuto = document.querySelector('.btnAuto');
+const btnCabang = document.querySelector('.btnCabang');
+const btnUpgrade = document.querySelectorAll('.btnUpgrade');
+const imgTahu = document.querySelector('.gambarTahu');
+
+function generateMoney() {
+  money += income;
+  moneyElem.textContent = `$${money}`;
+}
+
+function buyAutoClicker() {
+  if (money >= 80 && !autoClicker) {
+    autoClicker = true;
+    money -= 80;
+    moneyElem.textContent = `$${money}`;
+    setInterval(generateMoney, 1000);
+  }
+}
+
+function buyCabang() {
+  if (money >= 50) {
+    cabang++;
+    money -= 50;
+    moneyElem.textContent = `$${money}`;
+    cabangElem.textContent = `${cabang}`;
+  }
+}
+
+imgTahu.addEventListener('click', function () {
+  generateMoney();
+});
+
+btnAuto.addEventListener('click', function () {
+  buyAutoClicker();
+});
+
+btnCabang.addEventListener('click', function () {
+  buyCabang();
+});
+
+for (let i = 0; i < btnUpgrade.length; i++) {
+  btnUpgrade[i].addEventListener('click', function (event) {
+    upgradeIncome(event);
+  });
+}
+
+function openModal() {
+  document.getElementById("upgradeTokoModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("upgradeTokoModal").style.display = "none";
+}
+
+function upgradeIncome(event) {
+  const selectedUpgrade = upgrades[event.target.dataset.index];
+  if (money >= selectedUpgrade.cost) {
+    income += selectedUpgrade.incomeIncrease;
+    money -= selectedUpgrade.cost;
+    incomeElem.textContent = `$${income}`;
+    moneyElem.textContent = `$${money}`;
+    closeModal();
+  }
+}
+
+// Update income display
+const incomeElem = document.getElementById('income');
+incomeElem.textContent = `Income Juragan = $${income}`;;
+
+  </script>
+</body>
+
+</html>

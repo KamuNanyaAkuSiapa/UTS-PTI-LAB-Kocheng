@@ -1,0 +1,53 @@
+@media (min-width: 500px){
+  .container{
+    max-width: 800px;
+  }
+}
+
+html, body{
+  height: 100%;
+}
+
+
+.mainDisplay {
+  height: 100%;
+  background-image: url(../Asset/img/background-utama.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.judul h1{
+  font-family: 'Sigmar One', cursive;
+  text-shadow: 0px 6px 5px rgba(185, 185, 185, 1);
+  color: #232323;
+  margin-top: 30px;
+  font-size: 100px;
+}
+
+.btn{
+  padding: 20px 24px;
+  border: none;
+  background-color: #078080;
+  color: #f8f5f2;
+  border-radius: 10px;
+  box-shadow: 1px 10px 47px 8px rgba(199,199,199,0.68);
+  width: 30%;
+}
+
+.btn2{
+  padding: 20px 24px;
+  border: none;
+  background-color: #078080;
+  color: #f8f5f2;
+  border-radius: 10px;
+  box-shadow: 1px 10px 47px 8px rgba(199,199,199,0.68);
+  width: 30%;
+}
+
+.button{
+  margin-top: 120px;
+}
+
+.gambarTahu{
+  width: 200px;
+}

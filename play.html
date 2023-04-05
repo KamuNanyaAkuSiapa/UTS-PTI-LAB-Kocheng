@@ -18,7 +18,7 @@
         <div class="container text-center judulGame">
           <h1>Tahu Bulat's Game</h1>
         </div>
-        <a href="#"><button class="btn-nav">About Us</button></a>
+        <a href="aboutus.html"><button class="btn-nav">About Us</button></a>
       </div>
     </nav>
 
@@ -41,7 +41,7 @@
 
               <div>
                 <Button class="btnBuy btnAuto p-2">Auto Clicker $80</Button>
-                <Button class="btnBuy btnCabang p-2 mt-3">Toko Baru $50</Button>
+                <Button class="btnBuy btnCabang p-2 mt-3" onclick="doubleIncome()">Toko Baru $50</Button>
                 <button type="button" class="btnBuy p-2 mt-3" onclick="openModal()">Upgrades</button>
               </div>
             </div>
@@ -107,6 +107,13 @@ const btnCabang = document.querySelector('.btnCabang');
 const btnUpgrade = document.querySelectorAll('.btnUpgrade');
 const imgTahu = document.querySelector('.gambarTahu');
 
+function doubleIncome()
+{
+  income *= 2;
+  money += income;
+  moneyElem.textContent = `$${money}`;
+}
+
 function generateMoney() {
   money += income;
   moneyElem.textContent = `$${money}`;
@@ -119,6 +126,10 @@ function buyAutoClicker() {
     moneyElem.textContent = `$${money}`;
     setInterval(generateMoney, 1000);
   }
+    else if(money < 80 && !autoClicker)
+    {
+      alert("Uang Tidak Cukup Untuk Membeli Autoclicker");
+    }
 }
 
 function buyCabang() {
@@ -128,6 +139,10 @@ function buyCabang() {
     moneyElem.textContent = `$${money}`;
     cabangElem.textContent = `${cabang}`;
   }
+    else if(money < 50)
+    {
+      alert("Uang Tidak Cukup Untuk Membeli Toko Baru");
+    }
 }
 
 imgTahu.addEventListener('click', function () {
@@ -161,7 +176,7 @@ function upgradeIncome(event) {
   if (money >= selectedUpgrade.cost) {
     income += selectedUpgrade.incomeIncrease;
     money -= selectedUpgrade.cost;
-    incomeElem.textContent = `$${income}`;
+    incomeElem.textContent = "Income Juragan = " + `$${income}`;
     moneyElem.textContent = `$${money}`;
     closeModal();
   }
@@ -169,7 +184,7 @@ function upgradeIncome(event) {
 
 // Update income display
 const incomeElem = document.getElementById('income');
-incomeElem.textContent = `Income Juragan = $${income}`;;
+incomeElem.textContent = "Income Juragan = " + `$${income}`;
 
   </script>
 </body>
